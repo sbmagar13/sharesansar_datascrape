@@ -12,7 +12,7 @@ import sys
 
 def search(driver, date):
     """
-    Date in mm/dd/yyyy
+    search by date
     """
     driver.get("https://www.sharesansar.com/today-share-price")
     element = WebDriverWait(driver, 20).until(
@@ -60,28 +60,26 @@ def scrape_data(driver, date):
 
 
 def clean_df(df):
-    new_df = df.drop_duplicates(keep='first') # Dropping Duplicates
+    new_df = df.drop_duplicates(keep='first') # drop all duplicates
     new_header = new_df.iloc[0] # grabing the first row for the header
     new_df = new_df[1:] # taking the data lower than the header row
     new_df.columns = new_header # setting the header row as the df header
     new_df.drop(["S.No"], axis=1, inplace=True)
-    # new_df["Rate"] = new_df["Rate"].apply(lambda x:float(x.replace(",", ""))) # Convert Rate to Float
-    # new_df["Amount"] = new_df["Amount"].apply(lambda x:float(x.replace(",", ""))) # Convert Amount to Float
     return new_df
 
 
 def main():
     options = Options()
     options.headless = False
-    driver = webdriver.Chrome(options=options) # Start Browser
+    driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(120)
-    date = datetime.today().strftime('%m/%d/%Y') # Get today's date
+    date = datetime.today().strftime('%m/%d/%Y')
     # date = "2021-08-31"
-    search(driver, date) # Search the webpage
-    df = scrape_data(driver, date) # Scraping
-    final_df = clean_df(df) # Cleaning
+    search(driver, date)
+    df = scrape_data(driver, date)
+    final_df = clean_df(df) 
     file_name = date.replace("/", "_")
-    final_df.to_csv(f"data/{file_name}.csv", index=False) # Save file
+    final_df.to_csv(f"data/{file_name}.csv", index=False) # Save to CSV file
 
 
 if __name__ == "__main__":
