@@ -70,7 +70,7 @@ def clean_df(df):
 
 def main():
     options = Options()
-    options.headless = False
+    options.headless = True
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(120)
     date = datetime.today().strftime('%m/%d/%Y')
