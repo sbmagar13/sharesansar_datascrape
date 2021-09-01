@@ -19,7 +19,7 @@ def search(driver, date):
         EC.presence_of_element_located((By.XPATH, "//input[@id='fromdate']"))
     )
     date_input = driver.find_element_by_xpath("//input[@id='fromdate']")
-    search_btn = driver.find_element_by_xpath("//button[normalize-space()='Search']")
+    search_btn = driver.find_element_by_xpath("//button[@id='btn_todayshareprice_submit']")
     date_input.send_keys(date)
     search_btn.click()
     if driver.find_elements_by_xpath("//*[contains(text(), 'Could not find floorsheet matching the search criteria')]"):
