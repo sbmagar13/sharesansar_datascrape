@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '00 11 * * *' # 11:15am UTC => 05:00pm Nepal Time
+    - cron: '15 11 * * *' # 11:15am UTC => 05:00pm Nepal Time
 
 jobs:
 
