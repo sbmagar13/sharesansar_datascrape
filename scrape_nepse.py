@@ -15,9 +15,9 @@ def search(driver, date):
     search by date
     """
     driver.get("https://www.sharesansar.com/today-share-price")
-    # element = WebDriverWait(driver, 20).until(
-    #     EC.presence_of_element_located((By.XPATH, "//input[@id='fromdate']"))
-    # )
+    element = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.XPATH, "//input[@id='fromdate']"))
+    )
     date_input = driver.find_element_by_xpath("//input[@id='fromdate']")
     search_btn = driver.find_element_by_xpath("//button[@id='btn_todayshareprice_submit']")
     date_input.send_keys(date)
@@ -30,9 +30,9 @@ def search(driver, date):
 
 
 def get_page_table(driver, table_class):
-    # element = WebDriverWait(driver, 20).until(
-    #     EC.presence_of_element_located((By.XPATH, "//div[@class='floatThead-wrapper']"))
-    # )
+    element = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.XPATH, "//div[@class='floatThead-wrapper']"))
+    )
     soup = BeautifulSoup(driver.page_source, 'lxml')
     table = soup.find("table", {"class":table_class})
     tab_data = [[cell.text.replace('\r', '').replace('\n', '') for cell in row.find_all(["th","td"])]
