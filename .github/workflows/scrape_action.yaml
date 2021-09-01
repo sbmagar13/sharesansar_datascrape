@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '15 11 * * *' # 11:15am UTC => 05:00pm Nepal Time
+    - cron: '53 10 * * *' # 11:15am UTC => 05:00pm Nepal Time
 
 jobs:
 
@@ -27,7 +27,7 @@ jobs:
       
       - name: Execute Scraping Script
         run: |
-          python3 scrape_nepse.py
+          python scrape_nepse.py
       - name: Commit and Push Files
         run: |
            git config --local user.email "sbmagar.sbm99@gmail.com"
