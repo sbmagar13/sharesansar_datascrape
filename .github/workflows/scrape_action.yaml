@@ -1,0 +1,42 @@
+name: Nepse Data Auto Scrape
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '15 11 * * *' # 11:15am UTC => 05:00pm Nepal Time
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v2
+
+      - name: Setup Python Environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Execute Scraping Script
+        run: |
+          python3 scrape_nepse.py
+      - name: Commit and Push Files
+        run: |
+           git config --local user.email "sbmagar.sbm99@gmail.com"
+           git config --local user.name "sbmagar"        
+           git add .
+           git commit -am "Today's data has been scrapped successfully!"
+           git push origin main
