@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import sys
+import time
 
 
 def search(driver, date):
@@ -15,11 +16,13 @@ def search(driver, date):
     search by date
     """
     driver.get("https://www.sharesansar.com/today-share-price")
-    element = WebDriverWait(driver, 20).until(
+    WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.XPATH, "//input[@id='fromdate']"))
     )
     date_input = driver.find_element_by_xpath("//input[@id='fromdate']")
-    search_btn = driver.find_element_by_xpath("//button[@id='btn_todayshareprice_submit']")
+    time.sleep(2)
+    search_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@id='fromdate']")))
+    # search_btn = driver.find_element_by_xpath("//button[@id='btn_todayshareprice_submit']")
     date_input.send_keys(date)
     search_btn.click()
     if driver.find_elements_by_xpath("//*[contains(text(), 'Could not find floorsheet matching the search criteria')]"):
@@ -71,6 +74,7 @@ def clean_df(df):
 def main():
     options = Options()
     options.headless = True
+    options.add_argument="user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(120)
     date = datetime.today().strftime('%m/%d/%Y')
