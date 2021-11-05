@@ -33,5 +33,5 @@ jobs:
            git config --local user.email "sbmagar.sbm99@gmail.com"
            git config --local user.name "sbmagar"        
            git add .
-           git commit -am "Today's data has been scrapped successfully!"
+           git commit -am "Today's share data has been scrapped successfully!"
            git push origin main
