@@ -22,10 +22,10 @@ def search(driver, date):
     date_input = driver.find_element_by_xpath("//input[@id='fromdate']")
     time.sleep(2)
     search_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@id='fromdate']")))
-    # search_btn = driver.find_element_by_xpath("//button[@id='btn_todayshareprice_submit']")
+    # search_btn = driver.find_element("xpath", "//button[@id='btn_todayshareprice_submit']")
     date_input.send_keys(date)
     search_btn.click()
-    if driver.find_elements_by_xpath("//*[contains(text(), 'Could not find floorsheet matching the search criteria')]"):
+    if driver.find_element("xpath", "//*[contains(text(), 'Could not find floorsheet matching the search criteria')]"):
         print("No data found for the given search.")
         print("Script Aborted")
         driver.close()
