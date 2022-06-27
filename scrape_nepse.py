@@ -19,7 +19,7 @@ def search(driver, date):
     WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.XPATH, "//input[@id='fromdate']"))
     )
-    date_input = driver.find_element_by_xpath("//input[@id='fromdate']")
+    date_input = driver.find_element("xpath", "//input[@id='fromdate']")
     time.sleep(2)
     search_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@id='fromdate']")))
     # search_btn = driver.find_element("xpath", "//button[@id='btn_todayshareprice_submit']")
