@@ -6,3 +6,4 @@ pandas
 requests==2.25.1
 webdriver-manager
 webdriver-setup
+chromedriver-autoinstaller==0.3.1
