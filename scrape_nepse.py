@@ -11,6 +11,10 @@ import sys
 import time
 
 
+import chromedriver_autoinstaller as chromedriver
+chromedriver.install()
+
+
 def search(driver, date):
     """
     search by date
@@ -25,7 +29,7 @@ def search(driver, date):
     # search_btn = driver.find_element("xpath", "//button[@id='btn_todayshareprice_submit']")
     date_input.send_keys(date)
     search_btn.click()
-    if driver.find_element("xpath", "//*[contains(text(), 'Could not find floorsheet matching the search criteria')]"):
+    if driver.find_elements("xpath", "//*[contains(text(), 'Could not find floorsheet matching the search criteria')]"):
         print("No data found for the given search.")
         print("Script Aborted")
         driver.close()
@@ -54,7 +58,7 @@ def scrape_data(driver, date):
         page_table_df = get_page_table(driver, table_class="table table-bordered table-striped table-hover dataTable compact no-footer")
         df = df.append(page_table_df, ignore_index = True)
         try:
-            next_btn = driver.find_element_by_link_text('Next')
+            next_btn = driver.find_element('link_text', 'Next')
             driver.execute_script("arguments[0].click();", next_btn)
         except NoSuchElementException:
             break
@@ -73,8 +77,8 @@ def clean_df(df):
 
 def main():
     options = Options()
-    options.headless = True
-    options.add_argument="user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+    # options.headless = True
+    options.add_argument="user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(120)
     date = datetime.today().strftime('%m/%d/%Y')
