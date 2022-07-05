@@ -58,7 +58,7 @@ def scrape_data(driver, date):
         page_table_df = get_page_table(driver, table_class="table table-bordered table-striped table-hover dataTable compact no-footer")
         df = df.append(page_table_df, ignore_index = True)
         try:
-            next_btn = driver.find_element('link_text', 'Next')
+            next_btn = driver.find_element(By.LINK_TEXT, 'Next')
             driver.execute_script("arguments[0].click();", next_btn)
         except NoSuchElementException:
             break
