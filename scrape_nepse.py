@@ -56,7 +56,7 @@ def scrape_data(driver, date):
         count += 1
         print(f"Scraping page {count}")
         page_table_df = get_page_table(driver, table_class="table table-bordered table-striped table-hover dataTable compact no-footer")
-        df = df.append(page_table_df, ignore_index = True)
+        df = df.concat(page_table_df, ignore_index = True)
         try:
             next_btn = driver.find_element(By.LINK_TEXT, 'Next')
             driver.execute_script("arguments[0].click();", next_btn)
@@ -77,7 +77,7 @@ def clean_df(df):
 
 def main():
     options = Options()
-    options.headless = True
+    options.headless = False
     options.add_argument="user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(120)
