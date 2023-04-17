@@ -1,9 +1,9 @@
 beautifulsoup4==4.9.3
-selenium
+selenium==4.3.0
 lxml==4.6.3
-numpy
-pandas
+numpy==1.23.0
+pandas==1.4.3
 requests==2.25.1
-webdriver-manager
-webdriver-setup
+webdriver-manager==3.8.0
+webdriver-setup==1.0.0
 chromedriver-autoinstaller==0.3.1
