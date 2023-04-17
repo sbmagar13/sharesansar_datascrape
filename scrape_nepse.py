@@ -77,7 +77,7 @@ def clean_df(df):
 
 def main():
     options = Options()
-    options.headless = False
+    options.headless = True
     options.add_argument="user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(120)
